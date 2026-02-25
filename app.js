@@ -472,7 +472,7 @@ function renderLanding() {
 
   return `
     <section class="panel landing-panel phase-transition" data-testid="landing-fresh">
-      <h2>Operator Discovery Toolkit</h2>
+      <h2>The Discovery Journal</h2>
       <p class="lede">Discover how your mind actually works - not how you think it should.</p>
       <div class="landing-copy">
         <p>You use tools every day that were designed for someone else's brain.</p>
@@ -1205,7 +1205,7 @@ function reportSections() {
 
   return `
     <h2>Cognitive Architecture Document</h2>
-    <p class="doc-meta">Generated ${escapeHtml(new Date().toLocaleString())} | Operator Discovery Toolkit</p>
+    <p class="doc-meta">Generated ${escapeHtml(new Date().toLocaleString())} | The Discovery Journal</p>
     <h3>Summary Doctrine</h3>
     <p><strong>Primary directive:</strong> ${escapeHtml(state.p4.directive || "Not specified")}</p>
     <p><strong>Meta-rule:</strong> ${escapeHtml(state.p4.meta || "Not specified")}</p>
@@ -1319,7 +1319,7 @@ function documentHtml() {
   <body>
     <main>
       <h1>Cognitive Architecture Document</h1>
-      <p>Generated ${escapeHtml(new Date().toLocaleString())} with Operator Discovery Toolkit</p>
+      <p>Generated ${escapeHtml(new Date().toLocaleString())} with The Discovery Journal</p>
       ${reportSections()}
       <div class="controls"><button onclick="window.print()">Print / Save as PDF</button></div>
     </main>
@@ -1506,7 +1506,7 @@ function exportSessionBundle() {
     main: state,
     quick: quickState,
   };
-  download("operator-discovery-session.json", JSON.stringify(payload, null, 2), "application/json");
+  download("discovery-journal-session.json", JSON.stringify(payload, null, 2), "application/json");
 }
 
 function importSessionBundle(parsed) {
