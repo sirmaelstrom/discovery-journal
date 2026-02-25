@@ -221,13 +221,21 @@ button.danger:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  align-items: stretch;
 }
 
 .header-actions button,
 .header-actions .button-like {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1;
+  height: 34px;
   min-height: 34px;
-  padding: 0.4rem 0.65rem;
+  padding: 0 0.65rem;
+  white-space: nowrap;
 }
 
 #import-session {
