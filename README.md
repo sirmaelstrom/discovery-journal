@@ -1,16 +1,20 @@
-# Operator Discovery Toolkit
+# The Discovery Journal
 
 A static, local-first web application for guided cognitive architecture discovery.
 
-The toolkit walks a person through five phases:
+The journal walks a person through five phases:
 
 1. Systems Mapping
 2. Pattern Extraction
 3. Failure Mode Analysis
 4. Doctrine Derivation
-5. System Alignment
+5. Alignment
 
 The output is a print-ready/downloadable Cognitive Architecture Document based on the participant's own responses.
+
+Public repo: `sirmaelstrom/discovery-journal`
+
+Compatibility note: localStorage keys intentionally remain `operator-discovery-toolkit:*` for backward compatibility with existing sessions.
 
 ## Core Characteristics
 
