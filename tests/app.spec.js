@@ -202,7 +202,9 @@ test("observation responses persist and prepopulate patterns", async ({ page }) 
   await page.getByRole("button", { name: "Continue Where I Left Off" }).click();
 
   await page.getByRole("button", { name: "Yes, that's right" }).first().click();
-  const patternValues = await page.locator('textarea[data-kind="pattern"][data-field="statement"]').allTextContents();
+  const patternValues = await page
+    .locator('textarea[data-kind="pattern"][data-field="statement"]')
+    .allTextContents();
   expect(patternValues.some((value) => value.includes("recharge through variety"))).toBeTruthy();
 
   await page.getByRole("button", { name: "Partly - here's what's different" }).first().click();
