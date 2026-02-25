@@ -1,0 +1,45 @@
+{
+  "name": "operator-discovery-toolkit",
+  "version": "0.1.0",
+  "description": "Guided self-examination toolkit for discovering cognitive operating characteristics and deriving personal system design doctrine.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node scripts/static-server.js",
+    "prepare": "node scripts/setup-husky.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run format:check",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "pw:install": "playwright install chromium"
+  },
+  "keywords": [],
+  "author": "Justin Heath",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
+    "eslint": "^10.0.2",
+    "globals": "^17.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "lint-staged": {
+    "*.{js,cjs,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{html,css,json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

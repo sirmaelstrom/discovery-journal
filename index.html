@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operator Discovery Toolkit</title>
+    <meta
+      name="description"
+      content="A guided self-examination for discovering cognitive operating characteristics and deriving system design doctrine."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app">Skip to main content</a>
+    <div class="page-shell">
+      <header class="site-header">
+        <div>
+          <p class="eyebrow">Operator Discovery Toolkit</p>
+          <h1>Cognitive Architecture Guided Journal</h1>
+          <p class="lede">
+            One thoughtful step at a time. You can pause whenever you want and resume later.
+          </p>
+          <details id="session-info-panel" class="session-info" hidden>
+            <summary>Session Info</summary>
+            <div id="session-info-content"></div>
+          </details>
+        </div>
+        <div class="header-actions" aria-label="Session tools">
+          <button id="export-session" type="button">Export Session</button>
+          <label class="button-like" for="import-session">Import Session</label>
+          <input id="import-session" type="file" accept="application/json" />
+          <button id="print-document" type="button">Print Document</button>
+          <button id="download-document" type="button">Download HTML</button>
+          <button id="reset-session" type="button" class="danger">Reset</button>
+        </div>
+      </header>
+
+      <main id="app" tabindex="-1"></main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
