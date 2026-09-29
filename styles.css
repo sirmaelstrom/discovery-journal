@@ -148,6 +148,7 @@ small,
 }
 
 .masthead {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -999,10 +1000,14 @@ summary {
     width: min(1040px, 100% - 1.5rem);
   }
 
-  /* The summary sits right of the wordmark; open leftward to stay on screen. */
+  /* The summary may sit beside the wordmark or wrap under it, so anchor the
+     panel to the masthead row, which always spans the available width. */
+  .session-info {
+    position: static;
+  }
+
   .session-info-content-grid {
-    left: auto;
-    right: 0;
+    left: 0;
   }
 
   .actions button {
