@@ -398,8 +398,9 @@ function progressFillWidth() {
   const total = PHASES.length;
   const completedPhases = state.currentPhase - 1;
   const currentRatio = phaseScore(state.currentPhase);
-  const ratio = (completedPhases + currentRatio) / total;
-  return `${Math.max(0.02, Math.min(1, ratio)) * 100}%`;
+  // The rail's line runs from the first phase dot to the last: total - 1 segments.
+  const ratio = (completedPhases + currentRatio) / (total - 1);
+  return `${Math.max(0, Math.min(1, ratio)) * 100}%`;
 }
 
 function nowSavedFlash() {
@@ -452,9 +453,9 @@ function renderLanding() {
     const current = PHASES.find((phase) => phase.id === state.currentPhase) || PHASES[0];
     const completion = Math.round(phaseScore(state.currentPhase) * 100);
     return `
-      <section class="panel landing-panel phase-transition" data-testid="landing-welcome">
-        <h2>Welcome back</h2>
-        <p class="lede">You were on Phase ${state.currentPhase}: ${escapeHtml(current.name)} - ${completion}% complete.</p>
+      <section class="landing landing-welcome phase-transition" data-testid="landing-welcome">
+        <h2 class="landing-title">Welcome back.</h2>
+        <p class="lede">You were on Phase ${state.currentPhase}: ${escapeHtml(current.name)}, ${completion}% complete.</p>
         <p class="muted">Last saved: ${escapeHtml(
           state.updatedAt ? new Date(state.updatedAt).toLocaleString() : "Unknown"
         )}</p>
@@ -471,23 +472,34 @@ function renderLanding() {
   }
 
   return `
-    <section class="panel landing-panel phase-transition" data-testid="landing-fresh">
-      <h2>The Discovery Journal</h2>
-      <p class="lede">Discover how your mind actually works - not how you think it should.</p>
-      <div class="landing-copy">
-        <p>You use tools every day that were designed for someone else's brain.</p>
-        <p>Not maliciously. The people who built them assumed everyone thinks the same way. For some people, that fit is real. For others, it becomes constant low-grade friction they learn to blame on themselves.</p>
-        <p>This toolkit helps you stop guessing and start observing. You will examine seven cognitive systems, extract patterns with predictive power, and derive one doctrine that turns design decisions into testable ones.</p>
-        <p>You leave with a Cognitive Architecture Document: a clear, portable description of how your mind operates and what that means for your tools, workflows, and systems.</p>
+    <section class="landing landing-fresh phase-transition" data-testid="landing-fresh">
+      <div class="landing-intro">
+        <h2 class="landing-title">Discover how your mind actually works, not how you think it should.</h2>
+        <div class="landing-copy">
+          <p>You use tools every day that were designed for someone else's brain.</p>
+          <p>Not maliciously. The people who built them assumed everyone thinks the same way. For some people, that fit is real. For others, it becomes constant low-grade friction they learn to blame on themselves.</p>
+          <p>This journal helps you stop guessing and start observing. You will examine seven cognitive systems, extract patterns with predictive power, and derive one doctrine that turns design decisions into testable ones.</p>
+          <p>You leave with a Cognitive Architecture Document: a clear, portable description of how your mind operates and what that means for your tools, workflows, and systems.</p>
+        </div>
+        <div class="actions landing-actions">
+          <button class="primary" data-action="begin-discovery">Begin Discovery</button>
+        </div>
+        <p class="landing-meta">45-60 minutes, or take it across multiple sessions. Your answers stay in this browser.</p>
+        <p class="quick-link">
+          Not ready for the full process?
+          <button data-action="start-quick">Try the 5-Question Quick Assessment</button>
+        </p>
       </div>
-      <p><span class="landing-meta">45-60 minutes, or take it across multiple sessions</span></p>
-      <div class="actions">
-        <button class="primary" data-action="begin-discovery">Begin Discovery</button>
-      </div>
-      <p class="quick-link">
-        Not ready for the full process?
-        <button data-action="start-quick">Try the 5-Question Quick Assessment</button>
-      </p>
+      <aside class="landing-route" aria-labelledby="route-title">
+        <h3 id="route-title">The five phases</h3>
+        <ol class="route">
+          <li><strong>Systems Mapping</strong> Observe seven systems: energy, attention, motivation, identity, memory, learning, and environment.</li>
+          <li><strong>Pattern Extraction</strong> Turn what you noticed into patterns you can check against your own behavior.</li>
+          <li><strong>Failure Modes</strong> Separate what breaks you from what just makes a mess.</li>
+          <li><strong>Doctrine</strong> Compress it into one principle you can test decisions against.</li>
+          <li><strong>Alignment</strong> Apply that principle to your tools, routines, and workspace.</li>
+        </ol>
+      </aside>
     </section>
   `;
 }
@@ -1470,7 +1482,13 @@ async function copyDoctrineAsImage() {
   }
 
   try {
-    const canvas = await window.html2canvas(card, { backgroundColor: "#fffdf9", scale: 2 });
+    const canvas = await window.html2canvas(card, {
+      backgroundColor: "#1b1c22",
+      scale: 2,
+      // The shared image is the card itself, not the buttons that copy it.
+      ignoreElements: (el) =>
+        el.classList.contains("actions") || el.classList.contains("copy-status"),
+    });
     canvas.toBlob(async (blob) => {
       if (!blob) {
         runtime.doctrineStatus = "Could not generate image.";
